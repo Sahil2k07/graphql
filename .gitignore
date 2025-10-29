@@ -1,0 +1,6 @@
+vendor
+.env
+.env.production
+.env.development
+.env.local
+dev.toml
