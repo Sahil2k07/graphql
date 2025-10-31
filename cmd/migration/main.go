@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/Sahil2k07/graphql/internal/configs"
 	"github.com/Sahil2k07/graphql/internal/database"
+	"github.com/Sahil2k07/graphql/internal/models"
 	"github.com/charmbracelet/log"
 )
 
@@ -11,7 +12,7 @@ func main() {
 	database.Connect()
 
 	// Migration - 1
-	models := []any{}
+	models := []any{&models.User{}, &models.Profile{}}
 
 	err := database.DB.AutoMigrate(models...)
 	if err != nil {

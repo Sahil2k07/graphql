@@ -1,0 +1,59 @@
+extend type Query {
+  me: User!
+}
+
+extend type Mutation {
+  signup(input: SignupInput!): String! @public
+  signin(input: SigninInput!): AuthPayload! @public
+  forgotPassword(input: ForgotPasswordInput!): String! @public
+  resetPassword(input: ResetPasswordInput!): String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  userName: String!
+  role: String!
+  profile: Profile
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Profile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phone: String
+  address: String
+  city: String
+  state: String
+  country: String
+  zipCode: String
+}
+
+input SignupInput {
+  email: String!
+  userName: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input SigninInput {
+  email: String!
+  password: String!
+}
+
+input ForgotPasswordInput {
+  email: String!
+}
+
+input ResetPasswordInput {
+  oldPassword: String!
+  newPassword: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}

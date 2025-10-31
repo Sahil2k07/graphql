@@ -7,8 +7,8 @@ import (
 	"github.com/Sahil2k07/graphql/internal/database"
 	"github.com/Sahil2k07/graphql/internal/graphql/directives"
 	"github.com/Sahil2k07/graphql/internal/graphql/generated"
-	"github.com/Sahil2k07/graphql/internal/graphql/resolvers"
 	"github.com/Sahil2k07/graphql/internal/middlewares"
+	"github.com/Sahil2k07/graphql/internal/web"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -35,7 +35,7 @@ func main() {
 	gqlHandler := handler.NewDefaultServer(
 		generated.NewExecutableSchema(
 			generated.Config{
-				Resolvers: &resolvers.Resolver{},
+				Resolvers: web.Resolvers(),
 				Directives: generated.DirectiveRoot{
 					Public: directives.AuthDirective(),
 				},

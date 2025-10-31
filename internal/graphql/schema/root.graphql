@@ -3,6 +3,8 @@ schema {
   mutation: Mutation
 }
 
+directive @public on FIELD_DEFINITION
+
 type Query {
   _empty: String
 }
@@ -10,5 +12,3 @@ type Query {
 type Mutation {
   _empty: String
 }
-
-directive @public on FIELD_DEFINITION

@@ -2,8 +2,57 @@
 
 package generated
 
+type AuthPayload struct {
+	Token string `json:"token"`
+	User  *User  `json:"user"`
+}
+
+type ForgotPasswordInput struct {
+	Email string `json:"email"`
+}
+
 type Mutation struct {
 }
 
+type Profile struct {
+	ID        string  `json:"id"`
+	FirstName string  `json:"firstName"`
+	LastName  string  `json:"lastName"`
+	Phone     *string `json:"phone,omitempty"`
+	Address   *string `json:"address,omitempty"`
+	City      *string `json:"city,omitempty"`
+	State     *string `json:"state,omitempty"`
+	Country   *string `json:"country,omitempty"`
+	ZipCode   *string `json:"zipCode,omitempty"`
+}
+
 type Query struct {
+}
+
+type ResetPasswordInput struct {
+	OldPassword string `json:"oldPassword"`
+	NewPassword string `json:"newPassword"`
+}
+
+type SigninInput struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type SignupInput struct {
+	Email     string `json:"email"`
+	UserName  string `json:"userName"`
+	Password  string `json:"password"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+}
+
+type User struct {
+	ID        string   `json:"id"`
+	Email     string   `json:"email"`
+	UserName  string   `json:"userName"`
+	Role      string   `json:"role"`
+	Profile   *Profile `json:"profile,omitempty"`
+	CreatedAt string   `json:"createdAt"`
+	UpdatedAt string   `json:"updatedAt"`
 }
