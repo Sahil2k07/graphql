@@ -1,0 +1,5 @@
+vendor
+.env
+dev.example.toml
+LICENSE
+*.md
