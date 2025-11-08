@@ -74,7 +74,7 @@ func (s *authService) Signin(ctx context.Context, input generated.SigninInput) (
 		Email:    user.Email,
 		Role:     user.Role,
 		UserName: user.UserName,
-	}, 24*time.Hour)
+	}, 48*time.Hour)
 	if err != nil {
 		return nil, err
 	}
