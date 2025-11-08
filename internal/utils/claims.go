@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/Sahil2k07/graphql/internal/enums"
-	"github.com/Sahil2k07/graphql/internal/errors"
+	errz "github.com/Sahil2k07/graphql/internal/errors"
 )
 
 type UserClaims struct {
@@ -16,15 +16,19 @@ type UserClaims struct {
 	ExpiresAt *time.Time
 }
 
+type userCtxKey struct{}
+
+var UserCtxKey = userCtxKey{}
+
 func GetUserClaims(ctx context.Context) (*UserClaims, error) {
-	raw := ctx.Value("user")
+	raw := ctx.Value(UserCtxKey)
 	if raw == nil {
-		return nil, errors.NewUnauthorized("no user claims in context")
+		return nil, errz.NewUnauthorized("no user claims in context")
 	}
 
 	claims, ok := raw.(*UserClaims)
 	if !ok {
-		return nil, errors.NewUnauthorized("invalid claims type in context")
+		return nil, errz.NewUnauthorized("invalid claims type in context")
 	}
 
 	return claims, nil

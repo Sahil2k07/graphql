@@ -6,12 +6,9 @@ import (
 
 	"github.com/Sahil2k07/graphql/internal/configs"
 	"github.com/Sahil2k07/graphql/internal/services"
+	"github.com/Sahil2k07/graphql/internal/utils"
 	"github.com/labstack/echo/v4"
 )
-
-type contextKey string
-
-const UserKey contextKey = "user"
 
 func JWTContext() echo.MiddlewareFunc {
 	jwtConfig := configs.GetJWTConfig()
@@ -21,8 +18,7 @@ func JWTContext() echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			tokenCookie, err := c.Cookie(jwtConfig.CookieName)
 			if err != nil {
-				// No token — continue as anonymous
-				return next(c)
+				return next(c) // no cookie → unauthenticated but allowed
 			}
 
 			tokenStr := tokenCookie.Value
@@ -32,8 +28,7 @@ func JWTContext() echo.MiddlewareFunc {
 				return c.JSON(http.StatusUnauthorized, map[string]string{"error": "invalid or expired token"})
 			}
 
-			// Store claims in context for later use
-			ctx := context.WithValue(c.Request().Context(), UserKey, claims)
+			ctx := context.WithValue(c.Request().Context(), utils.UserCtxKey, claims)
 			c.SetRequest(c.Request().WithContext(ctx))
 
 			return next(c)

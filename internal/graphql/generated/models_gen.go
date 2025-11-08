@@ -7,6 +7,11 @@ type AuthPayload struct {
 	User  *User  `json:"user"`
 }
 
+type CreateTodoInput struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}
+
 type ForgotPasswordInput struct {
 	Email string `json:"email"`
 }
@@ -45,6 +50,30 @@ type SignupInput struct {
 	Password  string `json:"password"`
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
+}
+
+type Todo struct {
+	ID          string  `json:"id"`
+	Title       string  `json:"title"`
+	Status      string  `json:"status"`
+	Description *string `json:"description,omitempty"`
+	CreatedAt   *string `json:"createdAt,omitempty"`
+	UpdatedAt   *string `json:"updatedAt,omitempty"`
+	CompletedAt *string `json:"completedAt,omitempty"`
+}
+
+type TodoPage struct {
+	Todos      []*Todo `json:"todos"`
+	TotalCount int     `json:"totalCount"`
+	Page       int     `json:"page"`
+	Limit      int     `json:"limit"`
+}
+
+type UpdateTodoInput struct {
+	ID          string  `json:"id"`
+	Title       string  `json:"title"`
+	Status      *string `json:"status,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 type User struct {

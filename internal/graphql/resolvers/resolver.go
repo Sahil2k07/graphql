@@ -8,4 +8,5 @@ import "github.com/Sahil2k07/graphql/internal/interfaces"
 
 type Resolver struct {
 	AuthService interfaces.AuthService
+	TodoService interfaces.TodoService
 }

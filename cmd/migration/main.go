@@ -12,7 +12,7 @@ func main() {
 	database.Connect()
 
 	// Migration - 1
-	models := []any{&models.User{}, &models.Profile{}}
+	models := []any{&models.User{}, &models.Profile{}, &models.Todo{}}
 
 	err := database.DB.AutoMigrate(models...)
 	if err != nil {

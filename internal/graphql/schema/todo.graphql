@@ -1,0 +1,39 @@
+type Todo {
+  id: ID!
+  title: String!
+  status: String!
+  description: String
+  createdAt: String
+  updatedAt: String
+  completedAt: String
+}
+
+input CreateTodoInput {
+  title: String!
+  description: String!
+}
+
+input UpdateTodoInput {
+  id: ID!
+  title: String!
+  status: String
+  description: String
+}
+
+type TodoPage {
+  todos: [Todo!]!
+  totalCount: Int!
+  page: Int!
+  limit: Int!
+}
+
+extend type Query {
+  todos(page: Int = 1, limit: Int = 10): TodoPage!
+  todo(id: ID!): Todo
+}
+
+extend type Mutation {
+  createTodo(input: CreateTodoInput!): Todo!
+  updateTodo(input: UpdateTodoInput!): Todo!
+  deleteTodo(id: ID!): String!
+}

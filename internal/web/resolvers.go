@@ -9,9 +9,13 @@ import (
 // Resolvers wires all dependencies for gqlgen resolvers.
 func Resolvers() *resolvers.Resolver {
 	authRepo := repositories.NewAuthRepository()
+	todoRepo := repositories.NewTodoRepository()
+
 	authService := services.NewAuthService(authRepo)
+	todoService := services.NewTodoService(todoRepo)
 
 	return &resolvers.Resolver{
 		AuthService: authService,
+		TodoService: todoService,
 	}
 }
