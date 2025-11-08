@@ -1,5 +1,6 @@
 vendor
 .env
 dev.example.toml
+dev.toml
 LICENSE
 *.md

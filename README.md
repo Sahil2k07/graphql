@@ -1,4 +1,4 @@
-# 🚀 GraphQL Server Setup Guide
+# 🚀 GraphQL Server
 
 ## ⚙️ `.gqlgen.yml` Configuration
 
