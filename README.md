@@ -45,7 +45,6 @@ db_password = "sahil"
 db_name = "graphql"
 
 [jwt]
-cookie_name = "AUTH_TOKEN"
 signing_key = "K3#v@9$1!pZ^mL2&uQ7*rF4)gT8_W+oB"
 encryption_key = "8x@R!5#N0$kQ7_vT3&Wp2+Z^fC6*bM1h"
 ```

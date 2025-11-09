@@ -3,25 +3,29 @@ package middlewares
 import (
 	"context"
 	"net/http"
+	"strings"
 
-	"github.com/Sahil2k07/graphql/internal/configs"
 	"github.com/Sahil2k07/graphql/internal/services"
 	"github.com/Sahil2k07/graphql/internal/utils"
 	"github.com/labstack/echo/v4"
 )
 
 func JWTContext() echo.MiddlewareFunc {
-	jwtConfig := configs.GetJWTConfig()
 	crypto := services.NewCryptoService()
 
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			tokenCookie, err := c.Cookie(jwtConfig.CookieName)
-			if err != nil {
-				return next(c) // no cookie → unauthenticated but allowed
+			authHeader := c.Request().Header.Get("Authorization")
+			if authHeader == "" {
+				return next(c) // no token → unauthenticated but allowed
 			}
 
-			tokenStr := tokenCookie.Value
+			parts := strings.SplitN(authHeader, " ", 2)
+			if len(parts) != 2 || strings.ToLower(parts[0]) != "bearer" {
+				return c.JSON(http.StatusUnauthorized, map[string]string{"error": "invalid authorization header format"})
+			}
+
+			tokenStr := parts[1]
 
 			claims, err := crypto.DecryptAndVerifyJWT(c.Request().Context(), tokenStr)
 			if err != nil {
